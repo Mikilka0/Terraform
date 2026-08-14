@@ -2,7 +2,7 @@
   --bg-color: #f4f4f4;
   --line-color: #dcdcdc;
   --text-dark: #111111;
-  --text-green: #1a4d33; /* Темно-зелений для Strategic clarity */
+  --text-green: #1a4d33;
 }
 
 body {
@@ -52,7 +52,7 @@ body {
   height: 90vh;
   background-color: #fff;
   border: 1px solid var(--line-color);
-  border-radius: 8px; /* Легке заокруглення зовнішнього контейнера, як на фото */
+  border-radius: 8px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -124,7 +124,7 @@ body {
 }
 
 .nav-links a:hover {
-  color: var(--text-green);
+  color: var(--text-dark);
 }
 
 /* Головний контент */
@@ -153,7 +153,7 @@ body {
 }
 
 .title-serif {
-  font-family: "Playfair Display", "Georgia", serif; /* Шрифт із зарубками */
+  font-family: "Playfair Display", "Georgia", serif;
   font-size: clamp(2.5rem, 4.5vw, 5rem);
   font-style: italic;
   font-weight: 400;
@@ -166,12 +166,12 @@ body {
 /* Блок опису справа */
 .info-block {
   position: absolute;
-  top: 10%;
+  top: 80px;
   right: 4%;
   width: 100%;
-  max-width: 240px;
-  min-width: 180px;
-  z-index: 3;
+  max-width: 220px;
+  min-width: 160px;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -210,12 +210,12 @@ body {
 /* Контейнер для каменя */
 .reveal-container {
   position: relative;
-  width: 48vw;
+  width: 50vw;
   max-width: 900px;
   z-index: 2;
   cursor: crosshair;
   mix-blend-mode: darken;
-  transform: translate(2vw, -2vw);
+  transform: translate(-2vw, -2vw);
 }
 
 .base-layer {
@@ -318,4 +318,64 @@ body {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+@media (max-width: 768px) {
+  /* Хедер */
+  .header {
+    padding: 0 10px;
+    font-size: 0.55rem;
+  }
+  .nav-links {
+    gap: 10px;
+  }
+  .header-cta {
+    max-width: 70px;
+    text-align: right;
+    line-height: 1.3;
+  }
+
+  /* 1. Блок з описом: піднімаємо максимально високо під хедер і центруємо */
+  .info-block {
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    width: 85%;
+    max-width: 320px;
+    align-items: center;
+    text-align: center;
+  }
+  .info-text {
+    margin-bottom: 15px;
+  }
+
+  /* Камінь */
+  .reveal-container {
+    width: 85vw;
+    transform: translate(0, 0);
+  }
+
+  /* Заголовок */
+  .title-block {
+    bottom: 15%;
+    left: 5%;
+  }
+  .title-sans,
+  .title-serif {
+    font-size: clamp(2.2rem, 8vw, 3rem);
+  }
+
+  /* 2. Статистика: опускаємо в 60-піксельну комірку нижньої сітки */
+  .footer-stats {
+    bottom: 0 !important;
+    height: 60px !important;
+    right: 5%;
+    gap: 20px;
+    justify-content: flex-end;
+  }
+
+  .reveal-layer {
+    opacity: 1 !important;
+  }
 }

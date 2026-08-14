@@ -3,11 +3,11 @@
 // ==========================================
 const CONFIG = {
   colors: ["#c4c4c4", "#a0a0a0", "#1a4d33"], // Сірі та акцентний зелений
-  gap: 12, // Відстань між пікселями (як було в CSS)
+  gap: 12, // Відстань між пікселями
   pixelSize: 3, // Розмір пікселя
   speed: 36, // Швидкість мерехтіння
   appearFrom: "middle", // Анімація появи: 'middle', 'top', 'bottom', 'left', 'right'
-  durationMs: 1000, // Тривалість анімації (0.8s)
+  durationMs: 1000, // Тривалість анімації
 };
 
 // ==========================================
@@ -253,3 +253,54 @@ class PixelGridController {
 document.addEventListener("DOMContentLoaded", () => {
   new PixelGridController("pixel-canvas");
 });
+
+// ==========================================
+// АВТОСКАНУВАННЯ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ
+// ==========================================
+let scanProgress = 0;
+let scanDirection = 1;
+let lastTime = performance.now();
+
+function mobileAutoScan(timeNow) {
+  // Перевіряємо, чи це мобільний екран
+  if (window.innerWidth <= 768) {
+    const deltaTime = timeNow - lastTime;
+
+    // Швидкість сканування (змінюй 0.03 для прискорення/уповільнення)
+    scanProgress += 0.03 * scanDirection * deltaTime;
+
+    // Ефект "пінг-понгу" (вліво-вправо)
+    if (scanProgress >= 100) {
+      scanProgress = 100;
+      scanDirection = -1;
+    } else if (scanProgress <= 0) {
+      scanProgress = 0;
+      scanDirection = 1;
+    }
+
+    // Рахуємо X позицію від 0 до повної ширини контейнера
+    const rect = container.getBoundingClientRect();
+    const currentX = (scanProgress / 100) * rect.width;
+    const currentY = rect.height / 2; // Y завжди по центру каменя
+
+    // Рухаємо маску на камені
+    revealLayer.style.setProperty("--x", `${currentX}px`);
+    revealLayer.style.setProperty("--y", `${currentY}px`);
+
+    // Рухаємо піксельну сітку Canvas (якщо вона є)
+    if (pixelGrid) {
+      const gridRect = pixelGrid.getBoundingClientRect();
+      const globalX = rect.left - gridRect.left + currentX;
+      const globalY = rect.top - gridRect.top + currentY;
+
+      pixelGrid.style.setProperty("--mouse-x", `${globalX}px`);
+      pixelGrid.style.setProperty("--mouse-y", `${globalY}px`);
+    }
+  }
+
+  lastTime = timeNow;
+  requestAnimationFrame(mobileAutoScan); // Зациклюємо анімацію
+}
+
+// Запускаємо цикл при старті
+requestAnimationFrame(mobileAutoScan);
