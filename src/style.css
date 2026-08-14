@@ -98,6 +98,7 @@ body {
 
 /* Хедер */
 .header {
+  position: relative;
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -107,7 +108,7 @@ body {
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  z-index: 2;
+  z-index: 10;
 }
 
 .nav-links {
@@ -119,6 +120,11 @@ body {
 .nav-links a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: var(--text-green);
 }
 
 /* Головний контент */
@@ -206,25 +212,29 @@ body {
   position: relative;
   width: 48vw;
   max-width: 900px;
-  aspect-ratio: 16 / 9;
   z-index: 2;
   cursor: crosshair;
   mix-blend-mode: darken;
   transform: translate(2vw, -2vw);
 }
 
-.base-layer,
+.base-layer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+}
+
+/* Шар з біомом абсолютно позиціонуємо рівно поверх базового */
 .reveal-layer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Щоб камінь повністю влазив і не обрізався */
   pointer-events: none;
-}
 
-.reveal-layer {
   --x: 50%;
   --y: 50%;
   -webkit-mask-image: radial-gradient(
