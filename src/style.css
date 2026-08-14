@@ -20,6 +20,30 @@ body {
   padding: 2vw;
 }
 
+@font-face {
+  font-family: "Mariupol";
+  src: url("/fonts/Mariupol-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mariupol";
+  src: url("/fonts/Mariupol-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mariupol";
+  src: url("/fonts/Mariupol-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Головний контейнер із жорсткою сіткою */
 .grid-container {
   position: relative;
@@ -109,13 +133,13 @@ body {
 /* Текстовий блок (Raw data...) */
 .title-block {
   position: absolute;
-  bottom: 80px;
-  left: 30px;
+  bottom: 8%;
+  left: 4%;
   z-index: 3;
 }
 
 .title-sans {
-  font-size: 5vw;
+  font-size: clamp(2.5rem, 4.5vw, 5rem);
   font-weight: 500;
   margin: 0;
   line-height: 1;
@@ -124,7 +148,7 @@ body {
 
 .title-serif {
   font-family: "Playfair Display", "Georgia", serif; /* Шрифт із зарубками */
-  font-size: 5vw;
+  font-size: clamp(2.5rem, 4.5vw, 5rem);
   font-style: italic;
   font-weight: 400;
   color: var(--text-green);
@@ -136,18 +160,23 @@ body {
 /* Блок опису справа */
 .info-block {
   position: absolute;
-  top: 40px;
-  right: 30px;
-  width: 15vw;
+  top: 10%;
+  right: 4%;
+  width: 100%;
+  max-width: 240px;
+  min-width: 180px;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .info-text {
   font-size: 0.85rem;
-  line-height: 1.4;
+  line-height: 1.5;
   color: #555;
   margin-bottom: 20px;
-  padding-left: 5px;
+  padding-left: 0;
 }
 
 /* Суцільна чорна кнопка */
@@ -162,6 +191,10 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.2s ease;
+
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
 }
 
 .solid-btn:hover {
@@ -171,12 +204,13 @@ body {
 /* Контейнер для каменя */
 .reveal-container {
   position: relative;
-  width: 60vw;
-  max-width: 1000px;
+  width: 48vw;
+  max-width: 900px;
   aspect-ratio: 16 / 9;
   z-index: 2;
   cursor: crosshair;
   mix-blend-mode: darken;
+  transform: translate(2vw, -2vw);
 }
 
 .base-layer,
