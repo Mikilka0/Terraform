@@ -1,0 +1,78 @@
+body {
+  background-color: white;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Mariupol", sans-serif;
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.reveal-container {
+  position: relative;
+  width: 800px;
+  max-width: 90vw;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.base-layer,
+.reveal-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.reveal-layer {
+  --x: 50%;
+  --y: 50%;
+  -webkit-mask-image: radial-gradient(
+    circle 180px at var(--x) var(--y),
+    black 30%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 180px at var(--x) var(--y),
+    black 30%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.reveal-container:hover .reveal-layer {
+  opacity: 1;
+}
+
+/* Мінімалістична контурна кнопка */
+.ghost-button {
+  padding: 14px 36px;
+  background: transparent;
+  color: #e0e0e0;
+  border: 1px solid rgba(224, 224, 224, 0.3);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ghost-button:hover {
+  border-color: #4ade80; /* Зелений акцент під біом */
+  color: #4ade80;
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.1);
+}
