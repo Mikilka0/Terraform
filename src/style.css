@@ -1,27 +1,182 @@
+:root {
+  --bg-color: #f4f4f4;
+  --line-color: #dcdcdc;
+  --text-dark: #111111;
+  --text-green: #1a4d33; /* Темно-зелений для Strategic clarity */
+}
+
 body {
-  background-color: white;
+  background-color: var(--bg-color);
   margin: 0;
+  min-height: 100vh;
+  font-family:
+    "Mariupol",
+    -apple-system,
+    sans-serif;
+  color: var(--text-dark);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  font-family: "Mariupol", sans-serif;
+  padding: 2vw;
 }
 
-.hero-section {
+/* Головний контейнер із жорсткою сіткою */
+.grid-container {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  height: 90vh;
+  background-color: #fff;
+  border: 1px solid var(--line-color);
+  border-radius: 8px; /* Легке заокруглення зовнішнього контейнера, як на фото */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 40px;
 }
 
+/* Візуальні лінії сітки */
+.grid-line {
+  position: absolute;
+  background-color: var(--line-color);
+  z-index: 1;
+  pointer-events: none;
+}
+.line-v-left {
+  top: 0;
+  bottom: 0;
+  left: 20%;
+  width: 1px;
+}
+.line-v-center {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+}
+.line-v-right {
+  top: 0;
+  bottom: 0;
+  right: 20%;
+  width: 1px;
+}
+.line-h-top {
+  top: 60px;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+.line-h-bottom {
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+/* Хедер */
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  color: #888;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Головний контент */
+.main-content {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Текстовий блок (Raw data...) */
+.title-block {
+  position: absolute;
+  bottom: 80px;
+  left: 30px;
+  z-index: 3;
+}
+
+.title-sans {
+  font-size: 5vw;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.title-serif {
+  font-family: "Playfair Display", "Georgia", serif; /* Шрифт із зарубками */
+  font-size: 5vw;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-green);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Блок опису справа */
+.info-block {
+  position: absolute;
+  top: 40px;
+  right: 30px;
+  width: 15vw;
+  z-index: 3;
+}
+
+.info-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #555;
+  margin-bottom: 20px;
+  padding-left: 5px;
+}
+
+/* Суцільна чорна кнопка */
+.solid-btn {
+  background-color: var(--text-dark);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-family: "Mariupol", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.solid-btn:hover {
+  background-color: var(--text-green);
+}
+
+/* Контейнер для каменя */
 .reveal-container {
   position: relative;
-  width: 800px;
-  max-width: 90vw;
-  height: auto;
+  width: 60vw;
+  max-width: 1000px;
   aspect-ratio: 16 / 9;
-  overflow: hidden;
+  z-index: 2;
+  cursor: crosshair;
+  mix-blend-mode: darken;
 }
 
 .base-layer,
@@ -31,7 +186,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Щоб камінь повністю влазив і не обрізався */
   pointer-events: none;
 }
 
@@ -39,12 +194,12 @@ body {
   --x: 50%;
   --y: 50%;
   -webkit-mask-image: radial-gradient(
-    circle 180px at var(--x) var(--y),
+    circle 200px at var(--x) var(--y),
     black 30%,
     transparent 100%
   );
   mask-image: radial-gradient(
-    circle 180px at var(--x) var(--y),
+    circle 200px at var(--x) var(--y),
     black 30%,
     transparent 100%
   );
@@ -56,23 +211,67 @@ body {
   opacity: 1;
 }
 
-/* Мінімалістична контурна кнопка */
-.ghost-button {
-  padding: 14px 36px;
-  background: transparent;
-  color: #e0e0e0;
-  border: 1px solid rgba(224, 224, 224, 0.3);
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.reveal-container:hover .play-button {
+  opacity: 0;
 }
 
-.ghost-button:hover {
-  border-color: #4ade80; /* Зелений акцент під біом */
-  color: #4ade80;
-  box-shadow: 0 0 15px rgba(74, 222, 128, 0.1);
+.footer-stats {
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  z-index: 2;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.5rem;
+  color: #888;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.pixel-grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+
+  /* Маска у вигляді кола, що висвічує CANVAS довкола курсору */
+  --mouse-x: -500px;
+  --mouse-y: -500px;
+  -webkit-mask-image: radial-gradient(
+    circle 300px at var(--mouse-x) var(--mouse-y),
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 300px at var(--mouse-x) var(--mouse-y),
+    black 0%,
+    transparent 100%
+  );
+}
+
+/* Canvas займає всю ширину батьківського контейнера */
+#pixel-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
