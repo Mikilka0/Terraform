@@ -1,3 +1,4 @@
+/* 1. Змінні */
 :root {
   --bg-color: #f4f4f4;
   --line-color: #dcdcdc;
@@ -20,6 +21,7 @@ body {
   padding: 2vw;
 }
 
+/* 2. Типографія & Шрифти */
 @font-face {
   font-family: "Mariupol Regular";
   src: url("./fonts/Mariupol-Regular.ttf") format("truetype");
@@ -44,7 +46,7 @@ body {
   font-display: swap;
 }
 
-/* Головний контейнер із жорсткою сіткою */
+/* 3. Лейаут & Головна Сітка */
 .grid-container {
   position: relative;
   width: 100%;
@@ -58,7 +60,6 @@ body {
   flex-direction: column;
 }
 
-/* Візуальні лінії сітки */
 .grid-line {
   position: absolute;
   background-color: var(--line-color);
@@ -96,7 +97,7 @@ body {
   height: 1px;
 }
 
-/* Хедер */
+/* 4. Компоненти Хедера */
 .header {
   position: relative;
   height: 60px;
@@ -127,7 +128,7 @@ body {
   color: var(--text-dark);
 }
 
-/* Головний контент */
+/* 5. Основний контент & Текстові Блоки */
 .main-content {
   flex: 1;
   position: relative;
@@ -136,7 +137,6 @@ body {
   justify-content: center;
 }
 
-/* Текстовий блок (Raw data...) */
 .title-block {
   position: absolute;
   bottom: 8%;
@@ -163,7 +163,6 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* Блок опису справа */
 .info-block {
   position: absolute;
   top: 80px;
@@ -197,7 +196,6 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.2s ease;
-
   white-space: nowrap;
   width: 100%;
   text-align: center;
@@ -207,7 +205,7 @@ body {
   background-color: var(--text-green);
 }
 
-/* Контейнер для каменя */
+/* 6. Інтерактивна Складова (Камінь) */
 .reveal-container {
   position: relative;
   width: 50vw;
@@ -226,7 +224,6 @@ body {
   pointer-events: none;
 }
 
-/* Шар з біомом абсолютно позиціонуємо рівно поверх базового */
 .reveal-layer {
   position: absolute;
   top: 0;
@@ -234,7 +231,6 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-
   --x: 50%;
   --y: 50%;
   -webkit-mask-image: radial-gradient(
@@ -259,6 +255,37 @@ body {
   opacity: 0;
 }
 
+/* 7. Піксельна Сітка (Canvas) */
+.pixel-grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+  --mouse-x: -500px;
+  --mouse-y: -500px;
+  -webkit-mask-image: radial-gradient(
+    circle 300px at var(--mouse-x) var(--mouse-y),
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 300px at var(--mouse-x) var(--mouse-y),
+    black 0%,
+    transparent 100%
+  );
+}
+
+#pixel-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* 8. Статистика Футера */
 .footer-stats {
   position: absolute;
   bottom: 0;
@@ -288,40 +315,8 @@ body {
   letter-spacing: -0.05em;
 }
 
-.pixel-grid-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 1;
-
-  /* Маска у вигляді кола, що висвічує CANVAS довкола курсору */
-  --mouse-x: -500px;
-  --mouse-y: -500px;
-  -webkit-mask-image: radial-gradient(
-    circle 300px at var(--mouse-x) var(--mouse-y),
-    black 0%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    circle 300px at var(--mouse-x) var(--mouse-y),
-    black 0%,
-    transparent 100%
-  );
-}
-
-/* Canvas займає всю ширину батьківського контейнера */
-#pixel-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
+/* 9. Мобільна Складова */
 @media (max-width: 768px) {
-  /* Хедер */
   .header {
     padding: 0 10px;
     font-size: 0.55rem;
@@ -335,7 +330,6 @@ body {
     line-height: 1.3;
   }
 
-  /* 1. Блок з описом: піднімаємо максимально високо під хедер і центруємо */
   .info-block {
     top: 75px;
     left: 50%;
@@ -346,17 +340,14 @@ body {
     align-items: center;
     text-align: center;
   }
+
   .info-text {
     margin-bottom: 15px;
   }
-
-  /* Камінь */
   .reveal-container {
     width: 85vw;
     transform: translate(0, 0);
   }
-
-  /* Заголовок */
   .title-block {
     bottom: 15%;
     left: 5%;
@@ -366,7 +357,6 @@ body {
     font-size: clamp(2.2rem, 8vw, 3rem);
   }
 
-  /* 2. Статистика: опускаємо в 60-піксельну комірку нижньої сітки */
   .footer-stats {
     bottom: 0 !important;
     height: 60px !important;

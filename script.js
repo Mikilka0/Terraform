@@ -1,23 +1,19 @@
-// ==========================================
-// НАЛАШТУВАННЯ PIXEL CARD (Originkit адаптація)
-// ==========================================
+// 1. Конфігурація
 const CONFIG = {
   colors: ["#c4c4c4", "#a0a0a0", "#1a4d33"], // Сірі та акцентний зелений
   gap: 12, // Відстань між пікселями
   pixelSize: 3, // Розмір пікселя
   speed: 36, // Швидкість мерехтіння
-  appearFrom: "middle", // Анімація появи: 'middle', 'top', 'bottom', 'left', 'right'
+  appearFrom: "middle", // Анімація появи
   durationMs: 1000, // Тривалість анімації
 };
 
-// ==========================================
-// ЛОГІКА КУРСОРУ ТА РАДАРУ
-// ==========================================
+// 2. DOM Елементи & Глобальні EVENT LISTENERS
 const container = document.getElementById("reveal-container");
 const revealLayer = document.getElementById("reveal-layer");
 const pixelGrid = document.querySelector(".pixel-grid-overlay");
 
-// 1. Глобальний радар: оновлюємо CSS-змінні для маски
+// Глобальний радар: оновлюємо CSS-змінні для маски Canvas
 document.addEventListener("mousemove", (e) => {
   if (pixelGrid) {
     const rect = pixelGrid.getBoundingClientRect();
@@ -29,7 +25,7 @@ document.addEventListener("mousemove", (e) => {
   }
 });
 
-// 2. Локальне розкриття каменя
+// Локальне розкриття каменя
 container.addEventListener("mousemove", (e) => {
   const rect = container.getBoundingClientRect();
   const x = e.clientX - rect.left;
@@ -38,9 +34,7 @@ container.addEventListener("mousemove", (e) => {
   revealLayer.style.setProperty("--y", `${y}px`);
 });
 
-// ==========================================
-// ORIGINKIT PIXEL CANVAS LOGIC (Vanilla JS)
-// ==========================================
+// 3. Анімаційні Утиліти (Cubic Bezier)
 function cubicBezier(x1, y1, x2, y2) {
   const cx = 3 * x1,
     bx = 3 * (x2 - x1) - cx,
@@ -65,6 +59,7 @@ function cubicBezier(x1, y1, x2, y2) {
 }
 const easeOut = cubicBezier(0, 0, 0.58, 1);
 
+// 4. Логіка Піксельного класу
 class Pixel {
   constructor(canvas, context, x, y, color, speed, delay, maxPx) {
     this.width = canvas.width;
@@ -146,6 +141,7 @@ class Pixel {
   }
 }
 
+// 5. Клас Grid Controller
 class PixelGridController {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
@@ -156,13 +152,11 @@ class PixelGridController {
 
     this.initPixels();
 
-    // Перемальовуємо при зміні розміру вікна
     window.addEventListener("resize", () => {
       this.initPixels();
       this.handleAnimation("appear");
     });
 
-    // Запускаємо анімацію появи, коли курсор заходить у вікно
     document.body.addEventListener("mouseenter", () =>
       this.handleAnimation("appear"),
     );
@@ -170,7 +164,6 @@ class PixelGridController {
       this.handleAnimation("disappear"),
     );
 
-    // Запуск одразу при завантаженні (можеш закоментувати, якщо хочеш щоб чекало на мишу)
     this.handleAnimation("appear");
   }
 
@@ -181,10 +174,9 @@ class PixelGridController {
 
     this.canvas.width = width;
     this.canvas.height = height;
-
     this.pixels = [];
-    let idx = 0;
 
+    let idx = 0;
     const effectiveSpeed = CONFIG.speed > 0 ? CONFIG.speed * 0.002 : 0;
     const step = Math.max(1, parseInt(CONFIG.gap));
 
@@ -249,27 +241,21 @@ class PixelGridController {
   }
 }
 
-// Ініціалізація Canvas
+// 6. Ініціалізація
 document.addEventListener("DOMContentLoaded", () => {
   new PixelGridController("pixel-canvas");
 });
 
-// ==========================================
-// АВТОСКАНУВАННЯ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ
-// ==========================================
+// 7. Мобільна логіка Авто-Сканування
 let scanProgress = 0;
 let scanDirection = 1;
 let lastTime = performance.now();
 
 function mobileAutoScan(timeNow) {
-  // Перевіряємо, чи це мобільний екран
   if (window.innerWidth <= 768) {
     const deltaTime = timeNow - lastTime;
-
-    // Швидкість сканування (змінюй 0.03 для прискорення/уповільнення)
     scanProgress += 0.03 * scanDirection * deltaTime;
 
-    // Ефект "пінг-понгу" (вліво-вправо)
     if (scanProgress >= 100) {
       scanProgress = 100;
       scanDirection = -1;
@@ -278,16 +264,13 @@ function mobileAutoScan(timeNow) {
       scanDirection = 1;
     }
 
-    // Рахуємо X позицію від 0 до повної ширини контейнера
     const rect = container.getBoundingClientRect();
     const currentX = (scanProgress / 100) * rect.width;
-    const currentY = rect.height / 2; // Y завжди по центру каменя
+    const currentY = rect.height / 2;
 
-    // Рухаємо маску на камені
     revealLayer.style.setProperty("--x", `${currentX}px`);
     revealLayer.style.setProperty("--y", `${currentY}px`);
 
-    // Рухаємо піксельну сітку Canvas (якщо вона є)
     if (pixelGrid) {
       const gridRect = pixelGrid.getBoundingClientRect();
       const globalX = rect.left - gridRect.left + currentX;
@@ -299,8 +282,7 @@ function mobileAutoScan(timeNow) {
   }
 
   lastTime = timeNow;
-  requestAnimationFrame(mobileAutoScan); // Зациклюємо анімацію
+  requestAnimationFrame(mobileAutoScan);
 }
 
-// Запускаємо цикл при старті
 requestAnimationFrame(mobileAutoScan);
