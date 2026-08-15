@@ -1,6 +1,6 @@
 /* 1. Змінні */
 :root {
-  --bg-color: #f4f4f4;
+  --bg-color: #ffffff;
   --line-color: #dcdcdc;
   --text-dark: #111111;
   --text-green: #1a4d33;
@@ -15,10 +15,6 @@ body {
     -apple-system,
     sans-serif;
   color: var(--text-dark);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2vw;
 }
 
 /* 2. Типографія & Шрифти */
@@ -50,11 +46,8 @@ body {
 .grid-container {
   position: relative;
   width: 100%;
-  max-width: 1600px;
-  height: 90vh;
-  background-color: #fff;
-  border: 1px solid var(--line-color);
-  border-radius: 8px;
+  min-height: 100vh;
+  background-color: var(--bg-color);
   overflow: hidden;
   display: flex;
   flex-direction: column;
