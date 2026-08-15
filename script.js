@@ -25,14 +25,16 @@ document.addEventListener("mousemove", (e) => {
   }
 });
 
-// Локальне розкриття каменя
-container.addEventListener("mousemove", (e) => {
-  const rect = container.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  revealLayer.style.setProperty("--x", `${x}px`);
-  revealLayer.style.setProperty("--y", `${y}px`);
-});
+// Перевірка на Локальне розкриття каменя
+if (container && revealLayer) {
+  container.addEventListener("mousemove", (e) => {
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    revealLayer.style.setProperty("--x", `${x}px`);
+    revealLayer.style.setProperty("--y", `${y}px`);
+  });
+}
 
 // 3. Анімаційні Утиліти (Cubic Bezier)
 function cubicBezier(x1, y1, x2, y2) {
@@ -145,6 +147,7 @@ class Pixel {
 class PixelGridController {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
+    if (!this.canvas) return;
     this.ctx = this.canvas.getContext("2d");
     this.pixels = [];
     this.animationRef = null;
@@ -241,17 +244,14 @@ class PixelGridController {
   }
 }
 
-// 6. Ініціалізація
-document.addEventListener("DOMContentLoaded", () => {
-  new PixelGridController("pixel-canvas");
-});
-
 // 7. Мобільна логіка Авто-Сканування
 let scanProgress = 0;
 let scanDirection = 1;
 let lastTime = performance.now();
 
 function mobileAutoScan(timeNow) {
+  if (!container || !revealLayer) return;
+
   if (window.innerWidth <= 768) {
     const deltaTime = timeNow - lastTime;
     scanProgress += 0.03 * scanDirection * deltaTime;
@@ -286,3 +286,289 @@ function mobileAutoScan(timeNow) {
 }
 
 requestAnimationFrame(mobileAutoScan);
+
+// 8. Розширена Логіка Землі (Originkit Адаптація: Three.js + D3)
+class TerraformGlobe {
+  constructor(containerId) {
+    this.container = document.getElementById(containerId);
+    if (!this.container || typeof THREE === "undefined") return;
+
+    this.container.innerHTML = ""; // Очищаємо контейнер
+
+    // Налаштування кольорів під дизайн Terraform
+    this.config = {
+      dotColor: "#1a4d33", // Акцентний зелений
+      oceanColor: "#f4f4f4", // Колір фону
+      gridColor: "#020202", // Колір ліній сітки
+      gridOpacity: 0.3, // Прозорість сітки
+      dotSize: 0.008, // Розмір пікселів-точок
+      density: 12, // Щільність точок
+      speed: 0.002, // Швидкість обертання
+    };
+
+    this.initScene();
+    this.loadWorldData();
+    this.setupInteractions();
+
+    // Запуск циклу
+    this.animate();
+  }
+
+  initScene() {
+    const width = this.container.clientWidth;
+    const height = this.container.clientHeight;
+
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+    this.camera.position.z = 2.5; // Віддалення камери
+
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    this.renderer.setSize(width, height);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.container.appendChild(this.renderer.domElement);
+
+    this.globeGroup = new THREE.Group();
+    this.scene.add(this.globeGroup);
+
+    // Додаємо напівпрозорий "океан" (основа сфери)
+    const oceanGeo = new THREE.SphereGeometry(1, 64, 64);
+    const oceanMat = new THREE.MeshBasicMaterial({
+      color: new THREE.Color(this.config.oceanColor),
+      transparent: true,
+      opacity: 0.1,
+    });
+    this.globeGroup.add(new THREE.Mesh(oceanGeo, oceanMat));
+
+    // Сітка Координат
+    this.drawGrid();
+
+    // Адаптивність при ресайзі
+    window.addEventListener("resize", () => {
+      const w = this.container.clientWidth;
+      const h = this.container.clientHeight;
+      this.camera.aspect = w / h;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(w, h);
+    });
+  }
+
+  drawGrid() {
+    const gridMaterial = new THREE.LineBasicMaterial({
+      color: new THREE.Color(this.config.gridColor),
+      transparent: true,
+      opacity: this.config.gridOpacity,
+    });
+
+    const gridGroup = new THREE.Group();
+    // Радіус трохи більший за 1, щоб лінії не ховалися всередині океану
+    const radius = 1.001;
+    const segments = 64;
+
+    // 1. Паралелі (Горизонтальні лінії) кожні 15 градусів
+    for (let lat = -75; lat <= 75; lat += 15) {
+      const points = [];
+      const latRad = lat * (Math.PI / 180);
+      const y = Math.sin(latRad) * radius;
+      const r = Math.cos(latRad) * radius;
+
+      for (let i = 0; i <= segments; i++) {
+        const lng = (i / segments) * Math.PI * 2;
+        points.push(new THREE.Vector3(Math.cos(lng) * r, y, Math.sin(lng) * r));
+      }
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      gridGroup.add(new THREE.Line(geometry, gridMaterial));
+    }
+
+    // 2. Меридіани (Вертикальні лінії) кожні 15 градусів
+    for (let lng = -180; lng < 180; lng += 15) {
+      const points = [];
+      const lngRad = lng * (Math.PI / 180);
+
+      for (let i = 0; i <= segments; i++) {
+        const lat = (i / segments) * Math.PI - Math.PI / 2;
+        const r = Math.cos(lat) * radius;
+        const y = Math.sin(lat) * radius;
+        points.push(
+          new THREE.Vector3(Math.cos(lngRad) * r, y, Math.sin(lngRad) * r),
+        );
+      }
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      gridGroup.add(new THREE.Line(geometry, gridMaterial));
+    }
+
+    this.globeGroup.add(gridGroup);
+  }
+
+  async loadWorldData() {
+    try {
+      // Завантажуємо GeoJSON (як в Originkit)
+      const response = await fetch(
+        "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/refs/heads/master/50m/physical/ne_50m_land.json",
+      );
+      const landFeatures = await response.json();
+
+      // Створюємо прихований Canvas для D3 проекції
+      const bitmapWidth = 2048;
+      const bitmapHeight = 1024;
+      const offscreenCanvas = document.createElement("canvas");
+      offscreenCanvas.width = bitmapWidth;
+      offscreenCanvas.height = bitmapHeight;
+      const ctx = offscreenCanvas.getContext("2d", {
+        willReadFrequently: true,
+      });
+
+      // Налаштовуємо D3 проекцію
+      const projection = d3
+        .geoEquirectangular()
+        .fitSize([bitmapWidth, bitmapHeight], { type: "Sphere" });
+      const pathGenerator = d3.geoPath().projection(projection).context(ctx);
+
+      // Малюємо карту (Чорний фон, білі материки)
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, bitmapWidth, bitmapHeight);
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      landFeatures.features.forEach((feature) => pathGenerator(feature));
+      ctx.fill();
+
+      const imageData = ctx.getImageData(0, 0, bitmapWidth, bitmapHeight);
+      const pixels = imageData.data;
+
+      // Функція перевірки: чи знаходяться координати на суші?
+      const isOnLand = (lng, lat) => {
+        const x = Math.round(((lng + 180) / 360) * bitmapWidth) % bitmapWidth;
+        const y = Math.round(((90 - lat) / 180) * bitmapHeight);
+        const clampedY = Math.max(0, Math.min(bitmapHeight - 1, y));
+        const idx = (clampedY * bitmapWidth + x) * 4;
+        return pixels[idx] > 128; // Якщо білий колір
+      };
+
+      this.generateDots(isOnLand);
+    } catch (error) {
+      console.error("Failed to load map data:", error);
+    }
+  }
+
+  generateDots(isOnLand) {
+    const dotCoordinates = [];
+    const baseStep = this.config.density * 0.08;
+
+    // Скануємо сітку координат і додаємо точки тільки там, де є суша
+    for (let lat = -90; lat <= 90; lat += baseStep) {
+      const latRad = (Math.abs(lat) * Math.PI) / 180;
+      const cosLat = Math.cos(latRad);
+      // Збільшуємо крок по довготі ближче до полюсів, щоб точки не злипалися
+      const lngStep = cosLat > 0.01 ? baseStep / Math.max(0.3, cosLat) : 360;
+
+      for (let lng = -180; lng < 180; lng += lngStep) {
+        if (isOnLand(lng, lat)) {
+          dotCoordinates.push([lng, lat]);
+        }
+      }
+    }
+
+    // Використовуємо InstancedMesh для максимальної продуктивності (як в Originkit)
+    const dotGeometry = new THREE.SphereGeometry(this.config.dotSize, 5, 5);
+    const dotMaterial = new THREE.MeshBasicMaterial({
+      color: new THREE.Color(this.config.dotColor),
+    });
+    const instancedMesh = new THREE.InstancedMesh(
+      dotGeometry,
+      dotMaterial,
+      dotCoordinates.length,
+    );
+
+    const dummy = new THREE.Object3D();
+
+    dotCoordinates.forEach((coord, i) => {
+      const [lng, lat] = coord;
+      const latRad = lat * (Math.PI / 180);
+      const lngRad = lng * (Math.PI / 180);
+
+      // Сферичні координати в 3D (X, Y, Z)
+      dummy.position.set(
+        Math.cos(latRad) * Math.sin(lngRad),
+        Math.sin(latRad),
+        Math.cos(latRad) * Math.cos(lngRad),
+      );
+      dummy.updateMatrix();
+      instancedMesh.setMatrixAt(i, dummy.matrix);
+    });
+
+    instancedMesh.instanceMatrix.needsUpdate = true;
+    this.globeGroup.add(instancedMesh);
+  }
+
+  setupInteractions() {
+    this.isDragging = false;
+    this.targetRotation = { x: 0, y: 0 };
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+
+    // Плавний Drag'n'Drop для обертання Землі
+    this.container.addEventListener("mousedown", (e) => {
+      this.isDragging = true;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!this.isDragging) return;
+      const dx = e.clientX - lastMouseX;
+      const dy = e.clientY - lastMouseY;
+
+      this.targetRotation.x += dx * 0.005;
+      this.targetRotation.y += dy * 0.005;
+
+      // Обмежуємо нахил по вертикалі
+      this.targetRotation.y = Math.max(
+        -Math.PI / 2,
+        Math.min(Math.PI / 2, this.targetRotation.y),
+      );
+
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
+
+    document.addEventListener("mouseup", () => {
+      this.isDragging = false;
+    });
+  }
+
+  animate() {
+    requestAnimationFrame(() => this.animate());
+
+    // Автоматичне обертання, коли користувач не тягне мишею
+    if (!this.isDragging) {
+      this.targetRotation.x -= this.config.speed;
+    }
+
+    // Плавна інтерполяція (Lerp) для м'якого руху
+    this.globeGroup.rotation.y +=
+      (this.targetRotation.x - this.globeGroup.rotation.y) * 0.1;
+    this.globeGroup.rotation.x +=
+      (this.targetRotation.y - this.globeGroup.rotation.x) * 0.1;
+
+    this.renderer.render(this.scene, this.camera);
+  }
+}
+
+// 9. Розумна Ініцалізація
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Перевіряємо, чи ми на Головній (шукаємо pixel-canvas)
+  const pixelCanvasEl = document.getElementById("pixel-canvas");
+  if (pixelCanvasEl) {
+    new PixelGridController("pixel-canvas");
+  }
+
+  // 2. Перевіряємо, чи ми на СТОРІНЦІ IMPACT (шукаємо earth-wrapper)
+  const earthWrapperEl = document.getElementById("earth-wrapper");
+  if (earthWrapperEl) {
+    // Важливо: перевіряємо, чи завантажився Three.js
+    if (typeof THREE !== "undefined") {
+      new TerraformGlobe("earth-wrapper");
+    } else {
+      console.warn("Three.js is not loaded!");
+    }
+  }
+});
