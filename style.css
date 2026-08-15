@@ -312,7 +312,7 @@ body {
   height: 100%;
 }
 
-/* 8. Статистика Футера */
+/* 8. Статистика Футера & компоненти */
 .footer-stats {
   position: absolute;
   bottom: 0;
@@ -342,6 +342,21 @@ body {
   letter-spacing: -0.05em;
 }
 
+.disclaimer-footer {
+  position: absolute;
+  bottom: 25px;
+  left: 4%;
+  font-family: "Mariupol", sans-serif;
+  font-size: 0.55rem;
+  color: #888;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  z-index: 10;
+  pointer-events: none;
+  max-width: 45%;
+  line-height: 1.4;
+}
+
 /* 9. Мобільна Складова */
 @media (max-width: 768px) {
   .header {
@@ -358,8 +373,15 @@ body {
     font-size: 12px;
   }
 
+  .title-block {
+    top: 90px;
+    bottom: auto;
+    left: 5%;
+  }
+
   .info-block {
-    top: 75px;
+    top: auto;
+    bottom: 110px;
     left: 50%;
     transform: translateX(-50%);
     right: auto;
@@ -369,16 +391,13 @@ body {
     text-align: center;
   }
 
-  .info-text {
-    margin-bottom: 15px;
-  }
   .reveal-container {
     width: 85vw;
     transform: translate(0, 0);
   }
-  .title-block {
-    bottom: 15%;
-    left: 5%;
+
+  .info-text {
+    margin-bottom: 15px;
   }
   .title-sans,
   .title-serif {
@@ -395,6 +414,13 @@ body {
 
   .reveal-layer {
     opacity: 1 !important;
+  }
+
+  .disclaimer-footer {
+    bottom: 10px;
+    font-size: 0.45rem;
+    left: 5%;
+    max-width: 40%; /* Щоб не наїжджав на цифри статистики справа */
   }
 }
 /* Сторінка про Імпакт */
