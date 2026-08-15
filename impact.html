@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terraform - Impact</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Підключаємо Three.js та D3 для прорахунку карти -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-line line-v-left"></div>
+      <div class="grid-line line-v-center"></div>
+      <div class="grid-line line-v-right"></div>
+      <div class="grid-line line-h-top"></div>
+      <div class="grid-line line-h-bottom"></div>
+
+      <header class="header">
+        <div class="logo">
+          <a href="index.html" style="text-decoration: none; color: inherit"
+            >✺ TERRAFORM</a
+          >
+        </div>
+        <nav class="nav-links">
+          <a href="#">PROJECTS</a>
+          <a href="#">TECHNOLOGY</a>
+          <a href="#" style="color: var(--text-dark)">IMPACT</a>
+        </nav>
+        <div class="header-cta">JOIN INITIATIVE ↗</div>
+      </header>
+
+      <main class="impact-content">
+        <div class="side-panel left-panel">
+          <h2 class="title-serif impact-title">Global<br />Restoration</h2>
+          <p class="info-text">
+            Our autonomous seeding drones and soil-revival nanotech are actively
+            reversing desertification across 4 continents. The map displays
+            real-time ecological stabilization zones.
+          </p>
+        </div>
+
+        <!-- Three.js згенерує Canvas саме сюди -->
+        <div class="earth-container" id="earth-wrapper"></div>
+
+        <div class="side-panel right-panel">
+          <div class="impact-stat-box">
+            <h3 class="stat-big">+40%</h3>
+            <p class="stat-desc">OXYGEN SATURATION</p>
+          </div>
+          <div class="impact-stat-box">
+            <h3 class="stat-big">0.8°C</h3>
+            <p class="stat-desc">LOCAL COOLING EFFECT</p>
+          </div>
+          <div class="impact-stat-box">
+            <h3 class="stat-big">ACTIVE</h3>
+            <p class="stat-desc">BIOME SYNC STATUS</p>
+          </div>
+        </div>
+      </main>
+
+      <script src="script.js"></script>
+    </div>
+  </body>
+</html>
