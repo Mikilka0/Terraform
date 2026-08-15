@@ -29,12 +29,19 @@
             >✺ TERRAFORM</a
           >
         </div>
-        <nav class="nav-links">
+
+        <!-- Кнопка мобільного меню (видно тільки на мобільному) -->
+        <button class="mobile-menu-btn" id="mobile-menu-btn">MENU</button>
+
+        <nav class="nav-links" id="nav-links">
           <a href="#">PROJECTS</a>
           <a href="#">TECHNOLOGY</a>
-          <a href="#" style="color: var(--text-dark)">IMPACT</a>
+          <a href="impact.html">IMPACT</a>
+          <!-- Ця кнопка покажеться тільки в мобільному меню -->
+          <a href="#" class="mobile-only-cta">JOIN INITIATIVE ↗</a>
         </nav>
-        <div class="header-cta">JOIN INITIATIVE ↗</div>
+
+        <div class="header-cta desktop-only">JOIN INITIATIVE ↗</div>
       </header>
 
       <main class="impact-content">
