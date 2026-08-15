@@ -250,8 +250,6 @@ let scanDirection = 1;
 let lastTime = performance.now();
 
 function mobileAutoScan(timeNow) {
-  if (!container || !revealLayer) return;
-
   if (window.innerWidth <= 768) {
     const deltaTime = timeNow - lastTime;
     scanProgress += 0.03 * scanDirection * deltaTime;
@@ -264,20 +262,23 @@ function mobileAutoScan(timeNow) {
       scanDirection = 1;
     }
 
-    const rect = container.getBoundingClientRect();
-    const currentX = (scanProgress / 100) * rect.width;
-    const currentY = rect.height / 2;
+    // Розраховуємо глобальні координати для вікна
+    const currentX = (scanProgress / 100) * window.innerWidth;
+    const currentY = window.innerHeight / 2;
 
-    revealLayer.style.setProperty("--x", `${currentX}px`);
-    revealLayer.style.setProperty("--y", `${currentY}px`);
+    // 1. Анімуємо розкриття каменя (тільки якщо він є на сторінці)
+    if (container && revealLayer) {
+      const rect = container.getBoundingClientRect();
+      const rockX = (scanProgress / 100) * rect.width;
+      const rockY = rect.height / 2;
+      revealLayer.style.setProperty("--x", `${rockX}px`);
+      revealLayer.style.setProperty("--y", `${rockY}px`);
+    }
 
+    // 2. Анімуємо радар піксельної сітки (якщо вона є на сторінці)
     if (pixelGrid) {
-      const gridRect = pixelGrid.getBoundingClientRect();
-      const globalX = rect.left - gridRect.left + currentX;
-      const globalY = rect.top - gridRect.top + currentY;
-
-      pixelGrid.style.setProperty("--mouse-x", `${globalX}px`);
-      pixelGrid.style.setProperty("--mouse-y", `${globalY}px`);
+      pixelGrid.style.setProperty("--mouse-x", `${currentX}px`);
+      pixelGrid.style.setProperty("--mouse-y", `${currentY}px`);
     }
   }
 
