@@ -266,7 +266,7 @@ function mobileAutoScan(timeNow) {
     const currentX = (scanProgress / 100) * window.innerWidth;
     const currentY = window.innerHeight / 2;
 
-    // 1. Анімуємо розкриття каменя (тільки якщо він є на сторінці)
+    // 7.1. Анімуємо розкриття каменя (тільки якщо він є на сторінці)
     if (container && revealLayer) {
       const rect = container.getBoundingClientRect();
       const rockX = (scanProgress / 100) * rect.width;
@@ -275,7 +275,7 @@ function mobileAutoScan(timeNow) {
       revealLayer.style.setProperty("--y", `${rockY}px`);
     }
 
-    // 2. Анімуємо радар піксельної сітки (якщо вона є на сторінці)
+    // 7.2. Анімуємо радар піксельної сітки (якщо вона є на сторінці)
     if (pixelGrid) {
       pixelGrid.style.setProperty("--mouse-x", `${currentX}px`);
       pixelGrid.style.setProperty("--mouse-y", `${currentY}px`);
@@ -365,7 +365,7 @@ class TerraformGlobe {
     const radius = 1.001;
     const segments = 64;
 
-    // 1. Паралелі (Горизонтальні лінії) кожні 15 градусів
+    // 8.1. Паралелі (Горизонтальні лінії) кожні 15 градусів
     for (let lat = -75; lat <= 75; lat += 15) {
       const points = [];
       const latRad = lat * (Math.PI / 180);
@@ -380,7 +380,7 @@ class TerraformGlobe {
       gridGroup.add(new THREE.Line(geometry, gridMaterial));
     }
 
-    // 2. Меридіани (Вертикальні лінії) кожні 15 градусів
+    // 8.2. Меридіани (Вертикальні лінії) кожні 15 градусів
     for (let lng = -180; lng < 180; lng += 15) {
       const points = [];
       const lngRad = lng * (Math.PI / 180);
@@ -556,13 +556,13 @@ class TerraformGlobe {
 
 // 9. Розумна Ініцалізація
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Перевіряємо, чи ми на Головній (шукаємо pixel-canvas)
+  // 9.1. Перевіряємо, чи ми на Головній (шукаємо pixel-canvas)
   const pixelCanvasEl = document.getElementById("pixel-canvas");
   if (pixelCanvasEl) {
     new PixelGridController("pixel-canvas");
   }
 
-  // 2. Перевіряємо, чи ми на СТОРІНЦІ IMPACT (шукаємо earth-wrapper)
+  // 9.2. Перевіряємо, чи ми на СТОРІНЦІ IMPACT (шукаємо earth-wrapper)
   const earthWrapperEl = document.getElementById("earth-wrapper");
   if (earthWrapperEl) {
     // Важливо: перевіряємо, чи завантажився Three.js
@@ -571,5 +571,19 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       console.warn("Three.js is not loaded!");
     }
+  }
+
+  // 9.3. Логіка мобільного меню (Dropdown)
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const navLinks = document.getElementById("nav-links");
+
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+      // Змінюємо текст кнопки при кліку
+      menuBtn.textContent = navLinks.classList.contains("active")
+        ? "CLOSE"
+        : "MENU";
+    });
   }
 });

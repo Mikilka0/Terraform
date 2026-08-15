@@ -102,13 +102,24 @@ body {
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  z-index: 10;
+  z-index: 11;
+  gap: 15px;
+}
+
+.logo {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-links {
   display: flex;
   gap: 30px;
   color: #888;
+  font-size: 12px;
+  white-space: nowrap;
+  justify-content: center;
+  flex-shrink: 1;
+  overflow: hidden;
 }
 
 .nav-links a {
@@ -119,6 +130,29 @@ body {
 
 .nav-links a:hover {
   color: var(--text-dark);
+}
+
+.header-cta {
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-family: "Mariupol", sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: var(--text-dark);
+  text-transform: uppercase;
+}
+
+.mobile-only-cta {
+  display: none;
 }
 
 /* 5. Основний контент & Текстові Блоки */
@@ -228,13 +262,13 @@ body {
   --y: 50%;
   -webkit-mask-image: radial-gradient(
     circle 200px at var(--x) var(--y),
-    black 50%,
-    transparent 80%
+    black 55%,
+    transparent 70%
   );
   mask-image: radial-gradient(
     circle 200px at var(--x) var(--y),
-    black 50%,
-    transparent 80%
+    black 55%,
+    transparent 70%
   );
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -321,6 +355,7 @@ body {
     max-width: 70px;
     text-align: right;
     line-height: 1.3;
+    font-size: 12px;
   }
 
   .info-block {
@@ -417,10 +452,11 @@ body {
 }
 
 .stat-big {
-  font-family: "Mariupol", sans-serif;
+  font-family:
+    "SF Mono", "JetBrains Mono", "Consolas", "Roboto Mono", monospace;
   font-size: clamp(2rem, 3vw, 3.5rem);
-  font-weight: 500;
-  letter-spacing: -0.04em;
+  font-weight: 400;
+  letter-spacing: -0.05em;
   margin: 0 0 5px 0;
   color: var(--text-dark);
 }
@@ -429,7 +465,7 @@ body {
   font-size: 0.75rem;
   font-weight: 700;
   color: #888;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   margin: 0;
 }
 
@@ -457,5 +493,53 @@ body {
 
   .impact-stat-box {
     margin-bottom: 20px;
+  }
+
+  .header {
+    padding: 0 20px;
+    font-size: 0.65rem;
+  }
+
+  .mobile-menu-btn {
+    display: block; /* Показуємо кнопку MENU */
+  }
+
+  .desktop-only {
+    display: none; /* Ховаємо десктопну CTA-кнопку, щоб не заважала */
+  }
+
+  .mobile-only-cta {
+    display: block;
+    margin-top: 10px;
+    color: var(--text-green) !important; /* Робимо акцентною */
+  }
+
+  /* Випадаюче меню по центру */
+  .nav-links {
+    position: absolute;
+    top: 60px; /* Відступаємо на висоту хедера */
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.98); /* Майже непрозорий білий */
+    backdrop-filter: blur(8px);
+    flex-direction: column; /* Ставимо посилання в стовпчик */
+    align-items: center; /* Відцентровуємо */
+    padding: 30px 0;
+    gap: 25px;
+    border-bottom: 1px solid var(--line-color);
+
+    /* Анімація плавного випадання */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+
+  /* Клас, який буде додавати JavaScript для відкриття меню */
+  .nav-links.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 }

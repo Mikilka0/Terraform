@@ -23,13 +23,24 @@
 
       <!-- 2. Хеддер -->
       <header class="header">
-        <div class="logo">✺ TERRAFORM</div>
-        <nav class="nav-links">
+        <div class="logo">
+          <a href="index.html" style="text-decoration: none; color: inherit"
+            >✺ TERRAFORM</a
+          >
+        </div>
+
+        <!-- Кнопка мобільного меню (видно тільки на мобільному) -->
+        <button class="mobile-menu-btn" id="mobile-menu-btn">MENU</button>
+
+        <nav class="nav-links" id="nav-links">
           <a href="#">PROJECTS</a>
           <a href="#">TECHNOLOGY</a>
-          <a href="#">IMPACT</a>
+          <a href="impact.html">IMPACT</a>
+          <!-- Ця кнопка покажеться тільки в мобільному меню -->
+          <a href="#" class="mobile-only-cta">JOIN INITIATIVE ↗</a>
         </nav>
-        <div class="header-cta">JOIN INITIATIVE ↗</div>
+
+        <div class="header-cta desktop-only">JOIN INITIATIVE ↗</div>
       </header>
 
       <!-- 3. Головний контент & Інтерактивна Зона -->
