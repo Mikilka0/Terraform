@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terraform - Projects</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="pixel-grid-overlay">
+        <canvas id="pixel-canvas"></canvas>
+      </div>
+
+      <div class="grid-line line-v-left"></div>
+      <div class="grid-line line-v-center" style="z-index: 0"></div>
+      <!-- Ховаємо за відео -->
+      <div class="grid-line line-v-right"></div>
+      <div class="grid-line line-h-top"></div>
+      <div class="grid-line line-h-bottom"></div>
+
+      <!-- Хедер -->
+      <header class="header">
+        <div class="logo">
+          <a href="index.html" style="text-decoration: none; color: inherit"
+            >✺ TERRAFORM</a
+          >
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn">MENU</button>
+
+        <nav class="nav-links" id="nav-links">
+          <a href="#" style="color: var(--text-dark)">PROJECTS</a>
+          <a href="#">TECHNOLOGY</a>
+          <a href="impact.html">IMPACT</a>
+          <a href="#" class="mobile-only-cta">JOIN INITIATIVE ↗</a>
+        </nav>
+
+        <div class="header-cta desktop-only">JOIN INITIATIVE ↗</div>
+      </header>
+
+      <!-- Головний контент -->
+      <main class="projects-content">
+        <!-- Блок з відео-маскою -->
+        <div class="video-text-wrapper">
+          <!-- Заміни src на свій локальний файл, наприклад ./videos/greening.mp4 -->
+          <video autoplay loop muted playsinline class="bg-video">
+            <source src="videos/forest_scenery_3.mp4" type="video/mp4" />
+          </video>
+
+          <div class="text-mask">
+            <!-- Текст, який буде прорізано -->
+            <h1 class="mask-heading">GLOBAL<br />REBIRTH</h1>
+          </div>
+        </div>
+
+        <!-- Заклик до дії (Call to Action) -->
+        <div class="projects-cta">
+          <p
+            class="info-text"
+            style="text-align: center; max-width: 400px; margin-bottom: 0"
+          >
+            Discover our active terraforming zones and track the progression of
+            bio-engineered flora.
+          </p>
+          <a
+            href="impact.html"
+            class="solid-btn"
+            style="
+              text-decoration: none;
+              display: inline-block;
+              box-sizing: border-box;
+            "
+            >EXPLORE MAP</a
+          >
+        </div>
+      </main>
+
+      <!-- Дисклеймер Футер -->
+      <div class="disclaimer-footer">
+        Non-commercial educational project developed by a student of Lviv
+        Polytechnic National University.
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
