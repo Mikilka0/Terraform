@@ -621,10 +621,18 @@ body {
     opacity: 1 !important;
   }
   .disclaimer-footer {
-    bottom: 10px;
-    font-size: 0.45rem;
-    left: 5%;
-    max-width: 40%;
+    position: relative; /* Відкріплюємо його від екрану, тепер він падає в самий низ сторінки */
+    bottom: auto;
+    left: 0;
+    max-width: 90%;
+    margin: 40px auto 20px auto;
+    text-align: center;
+    font-size: 0.5rem;
+  }
+
+  .grid-container {
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   /* --- Сторінка Impact --- */

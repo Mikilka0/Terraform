@@ -404,7 +404,7 @@ class TerraformGlobe {
     try {
       // Завантажуємо GeoJSON (як в Originkit)
       const response = await fetch(
-        "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/refs/heads/master/50m/physical/ne_50m_land.json",
+        "https://cdn.jsdelivr.net/gh/martynafford/natural-earth-geojson@master/50m/physical/ne_50m_land.json",
       );
       const landFeatures = await response.json();
 
@@ -584,6 +584,33 @@ document.addEventListener("DOMContentLoaded", () => {
       menuBtn.textContent = navLinks.classList.contains("active")
         ? "CLOSE"
         : "MENU";
+    });
+  }
+
+  // --- 9.4. Логіка сторінки Technology (Перемикання Секцій) ---
+  const techTabs = document.querySelectorAll(".tech-tab");
+  const techSections = document.querySelectorAll(".tech-section");
+
+  if (techTabs.length > 0 && techSections.length > 0) {
+    techTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        if (tab.classList.contains("active")) return;
+
+        // 1. Знімаємо active з усіх вкладок
+        techTabs.forEach((t) => t.classList.remove("active"));
+        // 2. Додаємо active на натиснуту вкладку
+        tab.classList.add("active");
+
+        // 3. Знімаємо active з усіх секцій контенту
+        techSections.forEach((section) => section.classList.remove("active"));
+
+        // 4. Знаходимо потрібну секцію по ID і показуємо її
+        const targetId = tab.getAttribute("data-target");
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          targetSection.classList.add("active");
+        }
+      });
     });
   }
 });
