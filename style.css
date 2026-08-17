@@ -136,6 +136,7 @@ body {
   white-space: nowrap;
   flex-shrink: 0;
   text-align: right;
+  color: var(--text-green);
 }
 
 .mobile-menu-btn {
@@ -162,14 +163,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 7;
+  z-index: auto;
 }
 
 .title-block {
   position: absolute;
   bottom: 8%;
   left: 4%;
-  z-index: 3;
+  z-index: 10;
 }
 
 .title-sans {
@@ -506,21 +507,24 @@ body {
   transform: scale(1.08);
 }
 
-.projects-cta {
-  position: relative;
-  margin-top: 0; /* Було 5vh, прибираємо зайвий простір */
-  transform: translateY(-20px); /* Піднімаємо весь блок ближче до заголовка */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px; /* Трохи зменшили відстань між абзацом і самою кнопкою (було 20px) */
-  z-index: 10; /* Тепер цей z-index спрацює і кнопка буде ПОВЕРХ сітки */
+.top-left-block {
+  top: 80px;
+  left: 4%;
+  right: auto;
 }
 
-.projects-cta .solid-btn {
-  background: transparent; /* Перетворюємо на ghost button */
-  color: var(--text-dark);
-  border: 1px solid var(--text-dark);
+.bottom-right-block {
+  top: auto;
+  bottom: 12%; /* Розміщуємо акуратно над футером */
+  right: 4%;
+  left: auto;
+}
+
+/* Перероблена прозора кнопка (Ghost Button) */
+.ghost-btn {
+  background-color: var(--text-dark); /* Суцільний чорний фон */
+  color: #fff; /* Білий текст */
+  border: none; /* Прибираємо обведення */
   backdrop-filter: none;
   width: auto;
   min-width: 240px;
@@ -529,13 +533,12 @@ body {
   position: relative;
 }
 
-.projects-cta .solid-btn:hover {
-  background: var(--text-dark);
-  color: var(--bg-color); /* Зворотна інверсія кольорів при наведенні */
+.ghost-btn:hover {
+  background-color: var(--text-green); /* Акцентний зелений при наведенні */
+  color: #fff; /* Зберігаємо білий текст */
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Трохи вираженіша тінь для масивнішої кнопки */
 }
-
 /* 999. Мобільна Складова  */
 @media (max-width: 768px) {
   /* --- Хедер та навігація --- */
@@ -659,13 +662,24 @@ body {
     line-height: 0.9;
     padding: 10px;
   }
-  .projects-cta {
-    margin-top: 3vh;
-    padding: 0 20px;
+  .top-left-block,
+  .bottom-right-block {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    transform: none; /* Скидаємо проблемний зсув вліво */
     width: 100%;
+    max-width: 320px;
+    align-items: center;
+    text-align: center;
+    margin: 30px auto 0; /* Вирівнюємо строго по центру */
+    padding: 0 20px; /* Додаємо безпечні відступи від країв екрану */
     box-sizing: border-box;
   }
-  .projects-cta .solid-btn {
+
+  .ghost-btn {
     width: 100%;
     max-width: 300px;
   }
