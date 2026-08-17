@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terraform - Join Initiative</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="grid-container">
+      <!-- Піксельна сітка -->
+      <div class="pixel-grid-overlay">
+        <canvas id="pixel-canvas"></canvas>
+      </div>
+
+      <!-- Лінії сітки -->
+      <div class="grid-line line-v-left"></div>
+      <div class="grid-line line-v-center"></div>
+      <div class="grid-line line-v-right"></div>
+      <div class="grid-line line-h-top"></div>
+      <div class="grid-line line-h-bottom"></div>
+
+      <!-- Хедер -->
+      <header class="header">
+        <div class="logo">
+          <a href="index.html" style="text-decoration: none; color: inherit"
+            >✺ TERRAFORM</a
+          >
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn">MENU</button>
+
+        <nav class="nav-links" id="nav-links">
+          <a href="project.html">PROJECT</a>
+          <a href="impact.html">IMPACT</a>
+          <a
+            href="join.html"
+            class="mobile-only-cta"
+            style="color: var(--text-dark)"
+            >JOIN INITIATIVE ↗</a
+          >
+        </nav>
+
+        <div class="header-cta desktop-only">
+          <a
+            href="join.html"
+            style="text-decoration: none; color: var(--text-dark)"
+            >JOIN INITIATIVE ↗</a
+          >
+        </div>
+      </header>
+
+      <!-- Головний контент -->
+      <main
+        class="main-content"
+        style="flex-direction: column; text-align: center; z-index: 10"
+      >
+        <div style="max-width: 650px; padding: 20px; margin-top: -5vh">
+          <h1
+            class="title-sans"
+            style="font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 5px"
+          >
+            Real action
+          </h1>
+          <h1
+            class="title-serif"
+            style="font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 30px"
+          >
+            Real impact
+          </h1>
+
+          <p
+            class="info-text"
+            style="
+              font-size: 0.95rem;
+              text-align: center;
+              padding: 0;
+              margin-bottom: 40px;
+              color: #555;
+            "
+          >
+            Thank you for exploring Terraform! <br /><br />
+            While this platform is a conceptual project, the mission to restore
+            our planet is very real. Help us turn digital terraforming into
+            reality by supporting verified ecological organizations today.
+          </p>
+
+          <!-- Кнопки для донату/переходу -->
+          <div
+            style="
+              display: flex;
+              gap: 20px;
+              justify-content: center;
+              flex-wrap: wrap;
+            "
+          >
+            <a
+              href="https://teamtrees.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="solid-btn"
+              style="min-width: 240px"
+            >
+              TEAMTREES ↗
+            </a>
+            <a
+              href="https://onetreeplanted.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="solid-btn ghost-btn"
+            >
+              ONE TREE PLANTED ↗
+            </a>
+          </div>
+        </div>
+      </main>
+
+      <!-- Дисклеймер Футер -->
+      <div class="disclaimer-footer">
+        Non-commercial educational project developed by a student of Lviv
+        Polytechnic National University.
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
