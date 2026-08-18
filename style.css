@@ -706,6 +706,46 @@ body {
   text-align: center;
 }
 
+/* --- СТОРІНКА 404 (NOT FOUND) --- */
+.error-content {
+  flex-direction: column;
+  text-align: center;
+  z-index: 10;
+}
+
+.error-wrapper {
+  max-width: 600px;
+  padding: 20px;
+  margin-top: -5vh; /* Трохи піднімаємо контент візуально вище центру */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-code {
+  font-family:
+    "SF Mono", "JetBrains Mono", "Consolas", monospace; /* Як у твоїх метриках[cite: 6] */
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-weight: 400;
+  color: var(--text-dark); /*[cite: 6] */
+  margin: 0;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+}
+
+.error-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.error-text {
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 450px;
+  padding: 0;
+}
+
 /* 999. Мобільна Складова  */
 @media (max-width: 768px) {
   /* --- Хедер та навігація --- */
