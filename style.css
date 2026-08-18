@@ -365,7 +365,7 @@ body {
   line-height: 1.4;
 }
 
-/* Сторінка про Імпакт */
+/* 9. Сторінка про Імпакт */
 .impact-content {
   flex: 1;
   position: relative;
@@ -437,7 +437,7 @@ body {
   margin: 0;
 }
 
-/* 11. Сторінка Проект & Текстова Маска */
+/* 10. Сторінка Проект & Текстова Маска */
 .projects-content {
   flex: 1;
   position: relative;
@@ -500,7 +500,7 @@ body {
   cursor: crosshair;
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-  z-index: 10; /* Витягуємо текст на самий верх, щоб курсор ідеально його захоплював */
+  z-index: 10;
 }
 
 .mask-heading:hover {
@@ -515,16 +515,15 @@ body {
 
 .bottom-right-block {
   top: auto;
-  bottom: 12%; /* Розміщуємо акуратно над футером */
+  bottom: 12%;
   right: 4%;
   left: auto;
 }
 
-/* Перероблена прозора кнопка (Ghost Button) */
 .ghost-btn {
-  background-color: var(--text-dark); /* Суцільний чорний фон */
-  color: #fff; /* Білий текст */
-  border: none; /* Прибираємо обведення */
+  background-color: var(--text-dark);
+  color: #fff;
+  border: none;
   backdrop-filter: none;
   width: auto;
   min-width: 240px;
@@ -534,13 +533,13 @@ body {
 }
 
 .ghost-btn:hover {
-  background-color: var(--text-green); /* Акцентний зелений при наведенні */
-  color: #fff; /* Зберігаємо білий текст */
+  background-color: var(--text-green);
+  color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Трохи вираженіша тінь для масивнішої кнопки */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* 12. Сторінка Join Initiative */
+/* 11. Сторінка Join Initiative */
 .join-content {
   flex-direction: column;
   text-align: center;
@@ -578,12 +577,10 @@ body {
   flex-wrap: wrap;
 }
 
-/* Уніфікуємо ширину обох кнопок на цій сторінці */
 .join-btn {
   min-width: 240px;
 }
 
-/* Глобальні стилі для посилань у хедері (щоб прибрати інлайн-стилі з усіх сторінок) */
 .header-link {
   text-decoration: none;
   color: inherit;
@@ -598,7 +595,7 @@ body {
   color: var(--text-dark) !important;
 }
 
-/* 13. СТОРІНКА SYSTEM STATUS */
+/* 12. Сторінка SYSTEM STATUS */
 .status-content {
   flex: 1;
   display: flex;
@@ -646,7 +643,7 @@ body {
 }
 
 .dash-card {
-  background: rgba(17, 17, 17, 0.85); /* Темний фон[cite: 6] */
+  background: rgba(17, 17, 17, 0.85);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
@@ -657,7 +654,7 @@ body {
 }
 
 .dash-title {
-  font-family: "Mariupol", sans-serif; /*[cite: 6] */
+  font-family: "Mariupol", sans-serif;
   font-size: 0.75rem;
   color: #888;
   letter-spacing: 1px;
@@ -666,16 +663,16 @@ body {
 }
 
 .dash-metric {
-  font-family: "SF Mono", "JetBrains Mono", monospace; /*[cite: 6] */
+  font-family: "SF Mono", "JetBrains Mono", monospace;
   font-size: 3rem;
-  color: var(--text-green); /*[cite: 6] */
+  color: var(--text-green);
   margin: 0;
   line-height: 1;
   letter-spacing: -0.05em;
 }
 
 .dash-metric-small {
-  font-family: "SF Mono", "JetBrains Mono", monospace; /*[cite: 6] */
+  font-family: "SF Mono", "JetBrains Mono", monospace;
   font-size: 2rem;
   color: #fff;
   margin: 0;
@@ -706,7 +703,7 @@ body {
   text-align: center;
 }
 
-/* --- СТОРІНКА 404 (NOT FOUND) --- */
+/* 13. Сторінка 404 (NOT FOUND) */
 .error-content {
   flex-direction: column;
   text-align: center;
@@ -716,18 +713,17 @@ body {
 .error-wrapper {
   max-width: 600px;
   padding: 20px;
-  margin-top: -5vh; /* Трохи піднімаємо контент візуально вище центру */
+  margin-top: -5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .error-code {
-  font-family:
-    "SF Mono", "JetBrains Mono", "Consolas", monospace; /* Як у твоїх метриках[cite: 6] */
+  font-family: "SF Mono", "JetBrains Mono", "Consolas", monospace;
   font-size: clamp(6rem, 15vw, 12rem);
   font-weight: 400;
-  color: var(--text-dark); /*[cite: 6] */
+  color: var(--text-dark);
   margin: 0;
   line-height: 0.85;
   letter-spacing: -0.05em;
@@ -748,7 +744,7 @@ body {
 
 /* 999. Мобільна Складова  */
 @media (max-width: 768px) {
-  /* --- Хедер та навігація --- */
+  /* Хедер та навігація */
   .header {
     padding: 0 20px;
     font-size: 0.65rem;
@@ -789,7 +785,7 @@ body {
     transform: translateY(0);
   }
 
-  /* --- Сторінка Index --- */
+  /* Сторінка Index */
   .title-block {
     top: 90px;
     bottom: auto;
@@ -828,7 +824,7 @@ body {
     opacity: 1 !important;
   }
   .disclaimer-footer {
-    position: relative; /* Відкріплюємо його від екрану, тепер він падає в самий низ сторінки */
+    position: relative;
     bottom: auto;
     left: 0;
     max-width: 90%;
@@ -842,7 +838,7 @@ body {
     overflow-x: hidden;
   }
 
-  /* --- Сторінка Impact --- */
+  /* Сторінка Impact */
   .impact-content {
     flex-direction: column;
     padding: 80px 5% 40px;
@@ -864,15 +860,14 @@ body {
     margin-bottom: 20px;
   }
 
-  /* --- Сторінка Projects --- */
+  /* Сторінка Projects */
   .video-text-wrapper {
     height: 40vh;
-    width: 100%; /* Повертаємо ширину на весь екран */
-    border-radius: 0; /* Прибираємо заокруглення */
-    box-shadow: none; /* Прибираємо тіні на мобільному */
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
   }
   .mask-heading {
-    /* Трохи зменшуємо шрифт (було 22vw), щоб слово "GLOBAL" точно помістилося */
     font-size: clamp(3rem, 15vw, 5rem);
     line-height: 0.9;
     padding: 10px;
@@ -884,13 +879,13 @@ body {
     bottom: auto;
     left: auto;
     right: auto;
-    transform: none; /* Скидаємо проблемний зсув вліво */
+    transform: none;
     width: 100%;
     max-width: 320px;
     align-items: center;
     text-align: center;
-    margin: 30px auto 0; /* Вирівнюємо строго по центру */
-    padding: 0 20px; /* Додаємо безпечні відступи від країв екрану */
+    margin: 30px auto 0;
+    padding: 0 20px;
     box-sizing: border-box;
   }
 
