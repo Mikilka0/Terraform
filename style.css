@@ -539,6 +539,173 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Трохи вираженіша тінь для масивнішої кнопки */
 }
+
+/* 12. Сторінка Join Initiative */
+.join-content {
+  flex-direction: column;
+  text-align: center;
+  z-index: 10;
+}
+
+.join-wrapper {
+  max-width: 650px;
+  padding: 20px;
+  margin-top: -5vh;
+}
+
+.join-title-sans {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  margin-bottom: 5px;
+}
+
+.join-title-serif {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  margin-bottom: 30px;
+}
+
+.join-text {
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 0;
+  margin-bottom: 40px;
+  color: #555;
+}
+
+.join-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Уніфікуємо ширину обох кнопок на цій сторінці */
+.join-btn {
+  min-width: 240px;
+}
+
+/* Глобальні стилі для посилань у хедері (щоб прибрати інлайн-стилі з усіх сторінок) */
+.header-link {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.header-link:hover {
+  color: var(--text-green);
+}
+
+.active-link {
+  color: var(--text-dark) !important;
+}
+
+/* 13. СТОРІНКА SYSTEM STATUS */
+.status-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 4% 40px;
+  z-index: 11;
+  position: relative;
+}
+
+.status-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Mariupol", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+#drone-counter {
+  color: #4ade80;
+}
+
+.status-title {
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  margin: 0;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 15px;
+}
+
+.dash-card {
+  background: rgba(17, 17, 17, 0.85); /* Темний фон[cite: 6] */
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dash-title {
+  font-family: "Mariupol", sans-serif; /*[cite: 6] */
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+}
+
+.dash-metric {
+  font-family: "SF Mono", "JetBrains Mono", monospace; /*[cite: 6] */
+  font-size: 3rem;
+  color: var(--text-green); /*[cite: 6] */
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.dash-metric-small {
+  font-family: "SF Mono", "JetBrains Mono", monospace; /*[cite: 6] */
+  font-size: 2rem;
+  color: #fff;
+  margin: 0;
+  line-height: 1;
+}
+
+.dash-desc {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 1px;
+  margin: 5px 0 0 0;
+}
+
+.dash-text {
+  color: #aaa;
+  margin-bottom: 0;
+}
+
+.chart-container {
+  width: 100%;
+  height: 120px;
+  margin: 10px 0;
+}
+
+.status-action {
+  margin-top: 10px;
+  text-align: center;
+}
+
 /* 999. Мобільна Складова  */
 @media (max-width: 768px) {
   /* --- Хедер та навігація --- */
