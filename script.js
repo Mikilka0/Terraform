@@ -596,15 +596,15 @@ document.addEventListener("DOMContentLoaded", () => {
       tab.addEventListener("click", () => {
         if (tab.classList.contains("active")) return;
 
-        // 1. Знімаємо active з усіх вкладок
+        // 9.4.1. Знімаємо active з усіх вкладок
         techTabs.forEach((t) => t.classList.remove("active"));
-        // 2. Додаємо active на натиснуту вкладку
+        // 9.4.2. Додаємо active на натиснуту вкладку
         tab.classList.add("active");
 
-        // 3. Знімаємо active з усіх секцій контенту
+        // 9.4.3. Знімаємо active з усіх секцій контенту
         techSections.forEach((section) => section.classList.remove("active"));
 
-        // 4. Знаходимо потрібну секцію по ID і показуємо її
+        // 9.9.4. Знаходимо потрібну секцію по ID і показуємо її
         const targetId = tab.getAttribute("data-target");
         const targetSection = document.getElementById(targetId);
         if (targetSection) {
@@ -612,5 +612,85 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
+  }
+
+  // 9.4 Логіка D3.js для сторінки Status
+  class TelemetryChart {
+    constructor(containerId) {
+      this.container = document.getElementById(containerId);
+      if (!this.container || typeof d3 === "undefined") return;
+
+      this.drawChart();
+
+      // Перемальовуємо при зміні розміру вікна
+      window.addEventListener("resize", () => {
+        this.container.innerHTML = "";
+        this.drawChart();
+      });
+    }
+
+    drawChart() {
+      const width = this.container.clientWidth;
+      const height = this.container.clientHeight;
+      const margin = { top: 10, right: 10, bottom: 10, left: 10 };
+
+      const innerWidth = width - margin.left - margin.right;
+      const innerHeight = height - margin.top - margin.bottom;
+
+      const svg = d3
+        .select(this.container)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      // Генеруємо фейкові дані (Вологість ґрунту)
+      const data = d3.range(20).map((i) => ({
+        x: i,
+        y: 40 + Math.random() * 20 + Math.sin(i / 2) * 10,
+      }));
+
+      const xScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(data, (d) => d.x)])
+        .range([0, innerWidth]);
+
+      const yScale = d3
+        .scaleLinear()
+        .domain([0, 100]) // Вологість від 0 до 100%
+        .range([innerHeight, 0]);
+
+      // Лінія графіка
+      const line = d3
+        .line()
+        .x((d) => xScale(d.x))
+        .y((d) => yScale(d.y))
+        .curve(d3.curveMonotoneX); // Плавні вигини
+
+      // Малюємо лінію
+      const path = svg
+        .append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "#4ade80") // Світліший, неоново-зелений колір для контрасту
+        .attr("stroke-width", 3)
+        .attr("d", line);
+
+      // Анімація появи лінії
+      const totalLength = path.node().getTotalLength();
+      path
+        .attr("stroke-dasharray", totalLength + " " + totalLength)
+        .attr("stroke-dashoffset", totalLength)
+        .transition()
+        .duration(2000)
+        .ease(d3.easeCubicOut)
+        .attr("stroke-dashoffset", 0);
+    }
+  }
+
+  // 9.5. Ініціалізація графіка на сторінці Status
+  if (document.getElementById("soil-chart")) {
+    new TelemetryChart("soil-chart");
   }
 });

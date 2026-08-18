@@ -23,62 +23,34 @@
       <!-- Хедер -->
       <header class="header">
         <div class="logo">
-          <a href="index.html" style="text-decoration: none; color: inherit"
-            >✺ TERRAFORM</a
-          >
+          <a href="index.html" class="header-link">✺ TERRAFORM</a>
         </div>
 
         <button class="mobile-menu-btn" id="mobile-menu-btn">MENU</button>
 
         <nav class="nav-links" id="nav-links">
           <a href="project.html">PROJECT</a>
+          <a href="status.html">SYSTEM STATUS</a>
           <a href="impact.html">IMPACT</a>
-          <a
-            href="join.html"
-            class="mobile-only-cta"
-            style="color: var(--text-dark)"
+          <a href="join.html" class="mobile-only-cta active-link"
             >JOIN INITIATIVE ↗</a
           >
         </nav>
 
         <div class="header-cta desktop-only">
-          <a
-            href="join.html"
-            style="text-decoration: none; color: var(--text-dark)"
+          <a href="join.html" class="header-link active-link"
             >JOIN INITIATIVE ↗</a
           >
         </div>
       </header>
 
       <!-- Головний контент -->
-      <main
-        class="main-content"
-        style="flex-direction: column; text-align: center; z-index: 10"
-      >
-        <div style="max-width: 650px; padding: 20px; margin-top: -5vh">
-          <h1
-            class="title-sans"
-            style="font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 5px"
-          >
-            Real action
-          </h1>
-          <h1
-            class="title-serif"
-            style="font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 30px"
-          >
-            Real impact
-          </h1>
+      <main class="main-content join-content">
+        <div class="join-wrapper">
+          <h1 class="title-sans join-title-sans">Real action</h1>
+          <h1 class="title-serif join-title-serif">Real impact</h1>
 
-          <p
-            class="info-text"
-            style="
-              font-size: 0.95rem;
-              text-align: center;
-              padding: 0;
-              margin-bottom: 40px;
-              color: #555;
-            "
-          >
+          <p class="info-text join-text">
             Thank you for exploring Terraform! <br /><br />
             While this platform is a conceptual project, the mission to restore
             our planet is very real. Help us turn digital terraforming into
@@ -86,20 +58,12 @@
           </p>
 
           <!-- Кнопки для донату/переходу -->
-          <div
-            style="
-              display: flex;
-              gap: 20px;
-              justify-content: center;
-              flex-wrap: wrap;
-            "
-          >
+          <div class="join-actions">
             <a
               href="https://teamtrees.org/"
               target="_blank"
               rel="noopener noreferrer"
-              class="solid-btn"
-              style="min-width: 240px"
+              class="solid-btn join-btn"
             >
               TEAMTREES ↗
             </a>
@@ -107,7 +71,7 @@
               href="https://onetreeplanted.org/"
               target="_blank"
               rel="noopener noreferrer"
-              class="solid-btn ghost-btn"
+              class="solid-btn ghost-btn join-btn"
             >
               ONE TREE PLANTED ↗
             </a>
