@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Terraform - System Status</title>
+    <title>Terraform - Статус системи</title>
     <link rel="stylesheet" href="style.css" />
     <!-- Підключаємо D3.js для графіків -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
@@ -24,27 +24,29 @@
       <!-- Хедер -->
       <header class="header">
         <div class="logo">
-          <a href="index.html" class="header-link">✺ TERRAFORM</a>
+          <a href="index_ua.html" class="header-link">✺ TERRAFORM</a>
         </div>
 
-        <button class="mobile-menu-btn" id="mobile-menu-btn">MENU</button>
+        <button class="mobile-menu-btn" id="mobile-menu-btn">МЕНЮ</button>
 
         <nav class="nav-links" id="nav-links">
-          <a href="project.html">PROJECTS</a>
-          <a href="status.html">SYSTEM STATUS</a>
-          <a href="impact.html">IMPACT</a>
-          <a href="join.html" class="mobile-only-cta">JOIN INITIATIVE ↗</a>
+          <a href="project.html">ПРОЄКТИ</a>
+          <a href="status.html">СТАТУС СИСТЕМИ</a>
+          <a href="impact.html">ВПЛИВ</a>
+          <a href="join.html" class="mobile-only-cta"
+            >ДОЛУЧИТИСЯ ДО ІНІЦІАТИВИ ↗</a
+          >
 
           <!-- Перемикач мов -->
           <div class="lang-switcher">
-            <span class="active-lang">EN</span>
+            <a href="status.html" class="lang-link">EN</a>
             <span class="lang-divider">/</span>
-            <a href="status_ua.html" class="lang-link">UA</a>
+            <span class="active-lang">UA</span>
           </div>
         </nav>
 
         <div class="header-cta desktop-only">
-          <a href="join.html" class="header-link">JOIN INITIATIVE ↗</a>
+          <a href="join.html" class="header-link">ДОЛУЧИТИСЯ ДО ІНІЦІАТИВИ ↗</a>
         </div>
       </header>
 
@@ -52,58 +54,58 @@
       <main class="status-content">
         <div class="status-header">
           <div class="status-indicator">
-            <span>SENSOR NETWORK ACTIVE</span>
+            <span>АКТИВНА МЕРЕЖА СЕНСОРІВ</span>
           </div>
-          <h1 class="title-serif status-title">Field Telemetry</h1>
+          <h1 class="title-serif status-title">Польова телеметрія</h1>
         </div>
 
         <div class="dashboard-grid">
           <!-- Блок 1: Дрони -->
           <div class="dash-card">
-            <h3 class="dash-title">Drone Fleet Activity</h3>
+            <h3 class="dash-title">Активність флоту дронів</h3>
             <div class="dash-data">
               <p class="dash-metric" id="drone-counter">145,000</p>
-              <p class="dash-desc">SEEDSBALLS DISPERSED</p>
+              <p class="dash-desc">РОЗСІЯНО НАСІННЄВИХ КУЛЬОК</p>
             </div>
             <div class="dash-data" style="margin-top: 20px">
               <p class="dash-metric-small">42</p>
-              <p class="dash-desc">ACTIVE DRONES IN ZONE A</p>
+              <p class="dash-desc">АКТИВНИХ ДРОНІВ У ЗОНІ А</p>
             </div>
           </div>
 
           <!-- Блок 2: D3 Графік -->
           <div class="dash-card">
-            <h3 class="dash-title">Soil Moisture Network</h3>
+            <h3 class="dash-title">Мережа вологості ґрунту</h3>
             <div id="soil-chart" class="chart-container"></div>
-            <p class="dash-desc">RIPARIAN ZONE A</p>
+            <p class="dash-desc">ПРИБЕРЕЖНА ЗОНА А</p>
           </div>
 
           <!-- Блок 3: Біоакустика -->
           <div class="dash-card">
-            <h3 class="dash-title">Bioacoustic Monitoring</h3>
+            <h3 class="dash-title">Біоакустичний моніторинг</h3>
             <p class="info-text dash-text">
-              AI-driven auditory analysis is tracking the return of native
-              fauna. Acoustic sensors deployed across the restoration zone
-              continuously identify bird and insect calls.
+              Слуховий аналіз на базі ШІ відстежує повернення місцевої фауни.
+              Акустичні сенсори, розгорнуті в зоні відновлення, безперервно
+              ідентифікують співи птахів та звуки комах.
             </p>
             <div class="dash-data" style="margin-top: 20px">
               <p class="dash-metric-small">+14</p>
-              <p class="dash-desc">INDICATOR SPECIES DETECTED</p>
+              <p class="dash-desc">ВИЯВЛЕНО ВИДІВ-ІНДИКАТОРІВ</p>
             </div>
           </div>
         </div>
 
         <!-- Логічний перехід на карту -->
         <div class="status-action">
-          <a href="impact.html" class="solid-btn ghost-btn">EXPLORE MAP</a>
+          <a href="impact.html" class="solid-btn ghost-btn">ДОСЛІДИТИ КАРТУ</a>
         </div>
       </main>
 
       <!-- Дисклеймер Футер -->
       <footer>
         <div class="disclaimer-footer">
-          Non-commercial educational project developed by a student of Lviv
-          Polytechnic National University.
+          Некомерційний освітній проєкт, розроблений студентом Національного
+          університету "Львівська політехніка".
         </div>
       </footer>
 

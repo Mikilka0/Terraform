@@ -102,7 +102,7 @@ body {
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  z-index: 11;
+  z-index: 12;
   gap: 15px;
 }
 
@@ -742,6 +742,40 @@ body {
   padding: 0;
 }
 
+/* 14. Перемикач Мови */
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-switcher span,
+.lang-switcher a {
+  font-family: "Mariupol", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.active-lang {
+  color: var(--text-dark); /* Активна мова чорна */
+  cursor: default;
+}
+
+.lang-divider {
+  color: var(--line-color); /* Колір сірих ліній сітки */
+}
+
+.lang-link {
+  color: #888;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.lang-link:hover {
+  color: var(--text-green); /* При наведенні стає акцентним зеленим */
+}
+
 /* 999. Мобільна Складова  */
 @media (max-width: 768px) {
   /* Хедер та навігація */
@@ -892,5 +926,12 @@ body {
   .ghost-btn {
     width: 100%;
     max-width: 300px;
+  }
+
+  /* Перемикач Мов */
+  .lang-switcher {
+    margin-left: 10px;
+    padding-left: 20px;
+    border-left: 1px solid var(--line-color); /* Акуратна роздільна лінія */
   }
 }

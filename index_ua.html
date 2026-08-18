@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Terraform - Global Greening</title>
+    <title>Terraform - Глобальне озеленення</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="grid-container">
-      <!-- Візуальна сітка & Ефекти задьного плану-->
+      <!-- Візуальна сітка & Ефекти заднього плану-->
       <!-- Піксельна сітка-сканер -->
       <div class="pixel-grid-overlay">
         <canvas id="pixel-canvas"></canvas>
@@ -21,33 +21,35 @@
       <div class="grid-line line-h-top"></div>
       <div class="grid-line line-h-bottom"></div>
 
-      <!-- Хеддер -->
+      <!-- Хедер -->
       <header class="header">
         <div class="logo">
-          <a href="index.html" style="text-decoration: none; color: inherit"
+          <a href="index_ua.html" style="text-decoration: none; color: inherit"
             >✺ TERRAFORM</a
           >
         </div>
 
         <!-- Кнопка мобільного меню (видно тільки на мобільному) -->
-        <button class="mobile-menu-btn" id="mobile-menu-btn">MENU</button>
+        <button class="mobile-menu-btn" id="mobile-menu-btn">МЕНЮ</button>
 
         <nav class="nav-links" id="nav-links">
-          <a href="project.html">PROJECT</a>
-          <a href="status.html">SYSTEM STATUS</a>
-          <a href="impact.html">IMPACT</a>
-          <a href="join.html" class="mobile-only-cta">JOIN INITIATIVE ↗</a>
+          <a href="project.html">ПРОЄКТ</a>
+          <a href="status.html">СТАТУС СИСТЕМИ</a>
+          <a href="impact.html">ВПЛИВ</a>
+          <a href="join.html" class="mobile-only-cta"
+            >ДОЛУЧИТИСЯ ДО ІНІЦІАТИВИ ↗</a
+          >
           <!-- Перемикач мов -->
           <div class="lang-switcher">
-            <span class="active-lang">EN</span>
+            <a href="index.html" class="lang-link">EN</a>
             <span class="lang-divider">/</span>
-            <a href="index_ua.html" class="lang-link">UA</a>
+            <span class="active-lang">UA</span>
           </div>
         </nav>
 
         <div class="header-cta desktop-only">
           <a href="join.html" style="text-decoration: none; color: inherit"
-            >JOIN INITIATIVE ↗</a
+            >ДОЛУЧИТИСЯ ДО ІНІЦІАТИВИ ↗</a
           >
         </div>
       </header>
@@ -56,16 +58,20 @@
       <main class="main-content">
         <!-- Блок з текстом зліва знизу -->
         <div class="title-block">
-          <h1 class="title-sans">Lifeless matter</h1>
-          <h1 class="title-serif">Living ecosystems</h1>
+          <h1 class="title-sans">Нежива матерія</h1>
+          <h1 class="title-serif">Живі екосистеми</h1>
         </div>
 
         <!-- Центральний камінь -->
         <div class="reveal-container" id="reveal-container">
-          <img src="./images/rock_1.jpg" alt="Barren Rock" class="base-layer" />
+          <img
+            src="./images/rock_1.jpg"
+            alt="Голий камінь"
+            class="base-layer"
+          />
           <img
             src="./images/rock_2_1.jpg"
-            alt="Flourishing Biome"
+            alt="Квітучий біом"
             class="reveal-layer"
             id="reveal-layer"
           />
@@ -74,8 +80,8 @@
         <!-- Блок з описом справа зверху -->
         <div class="info-block">
           <p class="info-text">
-            We restore devastated landscapes, breathing life into degraded
-            landscapes through data-driven ecosystem restoration.
+            Ми відновлюємо спустошені землі, вдихаючи життя в деградовані
+            ландшафти завдяки керованому даними відновленню екосистем.
           </p>
           <a
             href="impact.html"
@@ -85,7 +91,7 @@
               display: inline-block;
               box-sizing: border-box;
             "
-            >SEE IMPACT</a
+            >ПЕРЕГЛЯНУТИ ВПЛИВ</a
           >
         </div>
       </main>
@@ -93,20 +99,20 @@
       <!-- Футер зі статистикою по озелененню -->
       <footer class="footer-stats">
         <div class="stat-item">
-          <span class="stat-label">HECTARES RESTORED</span>
-          <span class="stat-value">12.4M</span>
+          <span class="stat-label">ВІДНОВЛЕНИХ ГЕКТАРІВ</span>
+          <span class="stat-value">12.4 млн</span>
         </div>
         <div class="stat-item">
-          <span class="stat-label">TREES PLANTED</span>
-          <span class="stat-value">4.8B</span>
+          <span class="stat-label">ПОСАДЖЕНИХ ДЕРЕВ</span>
+          <span class="stat-value">4.8 млрд</span>
         </div>
       </footer>
     </div>
 
     <!-- Дисклеймер Футер -->
     <div class="disclaimer-footer">
-      Non-commercial educational project developed by a student of Lviv
-      Polytechnic National University.
+      Некомерційний освітній проєкт, розроблений студентом Національного
+      університету "Львівська політехніка".
     </div>
     <script src="script.js"></script>
   </body>
